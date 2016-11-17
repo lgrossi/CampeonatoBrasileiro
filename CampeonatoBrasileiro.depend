@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1479424784 source:c:\users\lucas goulart grossi\desktop\teste\campeonatobrasileiro\main.c
+	<stdio.h>
+	<stdlib.h>
+	"sort.h"
+	"team.h"
+	"sbb.h"
+
+1479424173 c:\users\lucas goulart grossi\desktop\teste\campeonatobrasileiro\team.h
+	<stdio.h>
+	<stdlib.h>
+	<stdbool.h>
+	<string.h>
+
+1479425073 source:c:\users\lucas goulart grossi\desktop\teste\campeonatobrasileiro\team.c
+	"team.h"
+	"sort.h"
+
+1479230138 c:\users\lucas goulart grossi\desktop\teste\campeonatobrasileiro\sort.h
+	"team.h"
+
+1479387475 source:c:\users\lucas goulart grossi\desktop\teste\campeonatobrasileiro\sort.c
+	"sort.h"
+
+1479424176 c:\users\lucas goulart grossi\desktop\teste\campeonatobrasileiro\sbb.h
+	"team.h"
+
+1479424209 source:c:\users\lucas goulart grossi\desktop\teste\campeonatobrasileiro\sbb.c
+	<stdio.h>
+	<stdlib.h>
+	"sbb.h"
+
