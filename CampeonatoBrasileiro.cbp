@@ -31,23 +31,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="hash.c">
-			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
-		<Unit filename="hash.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="sbb.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="sbb.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="sbb.h" />
 		<Unit filename="sort.c">
 			<Option compilerVar="CC" />
 		</Unit>
