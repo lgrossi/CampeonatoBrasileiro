@@ -1,8 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "sbb.h"
 
-GAME* createGame(char* info, int key) {
+/*
+** Cria uma estrutura do tipo GAME.
+** @param info Informação inicial contida no GAME
+** @param key Chave do registro
+*/
+GAME *createGame(char *info, int key) {
     GAME *game;
     game = (GAME *)malloc(sizeof(GAME));
     game->key = key;
@@ -11,7 +14,13 @@ GAME* createGame(char* info, int key) {
     return game;
 }
 
-void ee(ArvoreSBB** ptr) {
+/*
+** As funções ee, dd, ed e de a seguir realizam as
+** transformações da SBB afim de manter as características
+** fundamentais exigidas no escopo e que definem a estrutura SBB.
+** @param ptr Apontador para um nó da árvore.
+*/
+void ee(ArvoreSBB **ptr) {
     ArvoreSBB *no = *ptr;
     ArvoreSBB *esq = no->esq;
     no->esq= esq->dir; // rotD(ptr)
@@ -20,8 +29,7 @@ void ee(ArvoreSBB** ptr) {
     no->esqtipo = SBB_VERTICAL;
     *ptr= esq;
 }
-
-void dd(ArvoreSBB** ptr) {
+void dd(ArvoreSBB **ptr) {
     ArvoreSBB *no = *ptr;
     ArvoreSBB *dir= no->dir;
     no->dir= dir->esq;// rotE(ptr)
@@ -30,8 +38,7 @@ void dd(ArvoreSBB** ptr) {
     no->dirtipo= SBB_VERTICAL;
     *ptr= dir;
 }
-
-void ed(ArvoreSBB** ptr) {
+void ed(ArvoreSBB **ptr) {
     ArvoreSBB *no = *ptr;
     ArvoreSBB *esq = no->esq;
     ArvoreSBB *dir = esq->dir;
@@ -43,7 +50,6 @@ void ed(ArvoreSBB** ptr) {
     no->esqtipo = SBB_VERTICAL;
     *ptr= dir;
 }
-
 void de(ArvoreSBB **ptr) {
     ArvoreSBB *no = *ptr;
     ArvoreSBB *dir= no->dir;
@@ -57,6 +63,13 @@ void de(ArvoreSBB **ptr) {
     *ptr= esq;
 }
 
+/*
+** Encontra o local adequado para inserir um dado elemento na árvore.
+** @param reg Registro a ser inserido
+** @param ptr Apontador para um nó da árvore.
+** @param incli Inclinação do nó que conterá o registro que será inserido.
+** @param fim Boolean que indica se chegou ou não ao fim de um ramo da árvore.
+*/
 void iInsere(GAME *reg, ArvoreSBB **ptr, int *incli, bool *fim) {
     if(*ptr == NULL) {
         iInsereAqui(reg, ptr, incli, fim);
@@ -107,6 +120,13 @@ void iInsere(GAME *reg, ArvoreSBB **ptr, int *incli, bool *fim) {
     return;
 }
 
+/*
+** Insere o registro no nó especificado.
+** @param reg Registro a ser inserido
+** @param ptr Apontador para o nó que vai receber o registro
+** @param incli Inclinação do nó dado.
+** @param fim Boolean que indica se chegou ou não ao fim de um ramo da árvore.
+*/
 void iInsereAqui(GAME  *reg, ArvoreSBB **ptr, int *incli, int *fim) {
     ArvoreSBB *no = malloc(sizeof(ArvoreSBB));
     no->reg = *reg;
@@ -120,17 +140,32 @@ void iInsereAqui(GAME  *reg, ArvoreSBB **ptr, int *incli, int *fim) {
     *fim = false;
 }
 
+/*
+** Faz a chamada do processo de inserir um registro na árvore.
+** @param raiz Raiz da árvore
+** @param reg Registro a ser inserido
+*/
 void insereElementoSBB(ArvoreSBB **raiz, GAME *reg) {
     int fim = false;
     int inclinacao = SBB_VERTICAL;
     iInsere(reg, raiz, &inclinacao, &fim);
 }
 
+/*
+** Inicializa uma árvore.
+** @param raiz Raiz da árvore (nó 0)
+*/
 void inicializa(ArvoreSBB *raiz) {
     raiz = NULL;
 }
 
-GAME* sbbPesquisa(ArvoreSBB **p, int key) {
+/*
+** Pesquisa um registro na árvore dada uma chave.
+** @param p Raíz da árvore onde a busca será realizada
+** @param key Chave do registro a ser buscado
+** @return reg Registro encontrado, do tipo GAME.
+*/
+GAME *sbbPesquisa(ArvoreSBB **p, int key) {
     if (*p == NULL)
         return createGame("null", -1);
     if (key < (*p)->reg.key)
@@ -140,6 +175,10 @@ GAME* sbbPesquisa(ArvoreSBB **p, int key) {
     return &(*p)->reg;
 }
 
+/*
+** Libera memória da árvore.
+** @param p Raíz da árvore a ser liberada
+*/
 void destroiSbb(ArvoreSBB **p) {
     if (*p == NULL)
         return;
@@ -153,7 +192,11 @@ void destroiSbb(ArvoreSBB **p) {
     return;
 }
 
-void destroiHash(HASH* hash) {
+/*
+** Libera memória da tabela hash.
+** @param hash Tabela hash a ser liberada
+*/
+void destroiHash(HASH *hash) {
     int i;
     for (i = 0; i < hash->tam; ++i) {
         destroiSbb(&hash->table[i]);
@@ -162,14 +205,29 @@ void destroiHash(HASH* hash) {
     free(hash);
 }
 
-HASH* criaHash(int t) {
+/*
+** Cria uma tabela hash.
+** @param t Tamanho da tabela
+** @return hash Tabela criada
+*/
+HASH *criaHash(int t) {
     int i;
-    HASH* hash = (HASH *)malloc(sizeof(HASH));
+    HASH *hash = (HASH *)malloc(sizeof(HASH));
     hash->tam = t;
-    hash->table = malloc(t * sizeof(ArvoreSBB));
+    // Aloca a tabela do tamanho dado, onde cada index corresponde a uma árvore de busca.
+    hash->table = malloc(t  *sizeof(ArvoreSBB));
     return hash;
 }
 
+/*
+** Função feita para otimizar a busca na tabela hash, transformando a chave em um index
+** O objetivo aqui é diminuir o número de colisões - uma vez que no trabalho proposto elas são inevitáveis
+** Criou-se uma função afim de colocar o menor número de registros por indexes, possível
+** Isso é, no mundo ideal, todos os indexes terem o mesmo número de registros.
+** @param key Chave a ser transformada em index
+** @param hash Tabela hash
+** @return index Index da tabela correspondente a chave dada
+*/
 int funcaoHash(int key, HASH hash) {
     int dia, mes, ano;
 
@@ -180,13 +238,48 @@ int funcaoHash(int key, HASH hash) {
     return (dia + mes*DAYS + ano*MONTHS*DAYS)%hash.tam;
 }
 
-void insereNaHash(HASH* h, GAME* x) {
+/*
+** Chamada de inserção de um registro na tabela hash.
+** @param h Tabela hash
+** @param x Registro do tipo GAME
+*/
+void insereNaHash(HASH *h, GAME *x) {
     int posicao = funcaoHash(x->key, *h);
     insereElementoSBB(&h->table[posicao], x);
-    GAME* game = sbbPesquisa(&h->table[posicao], x->key);
+    GAME *game = sbbPesquisa(&h->table[posicao], x->key);
 }
 
-GAME* pesquisaNaHash(HASH* h, int key) {
+/*
+** Chamada de pesquisa na tabela Hash.
+** @param h Tabela hash
+** @param key Chave do registro a ser buscado
+** @return registro do tipo GAME encontrado
+*/
+GAME *pesquisaNaHash(HASH *h, int key) {
     int posicao = funcaoHash(key, *h);
     sbbPesquisa(&h->table[posicao], key);
+}
+
+/*
+** Transforma uma data em chave do registro do tipo GAME.
+** @param date Data
+** @return key Chave do jogo
+*/
+int dateToKey(char date[25]) {
+    int step, begin, i, key;
+    for (i = step = begin = key = 0; i < strlen(date); ++i) {
+        if (date[i] == '/') {
+            key *= 100;
+            key += atoi (date + begin);
+            ++step;
+            begin = i + 1;
+        }
+        else if (i == strlen(date) - 1) {
+            key *= 10000;
+            key += atoi (date + begin);
+            ++step;
+            begin = i + 1;
+        }
+    }
+    return key;
 }

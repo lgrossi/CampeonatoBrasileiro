@@ -1,14 +1,14 @@
 #ifndef SORT_H_INCLUDED
 #define SORT_H_INCLUDED
 
-#include "team.h"
+#include "main.h"
 
-enum sorting_t { QUICK_SORT = 1, SHELL_SORT };
+typedef struct TEAM TEAM;
 
 int sort_cmp(TEAM *a, TEAM *b);
 
-void shellSort(TEAM* array, int elements);
+void shellSort(TEAM *array, int elements);
 
-void quickSort(TEAM teams[], int len, int size);
+void quickSort(TEAM *teams, int len);
 
 #endif // SORT_H_INCLUDED

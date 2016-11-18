@@ -409,8 +409,8 @@ Cruzeiro 13 2 -16 10
 29/01/2000;Atletico-PR;1;Flamengo;0
 29/01/2000;Chapecoense;2;Cruzeiro;2
 27/03/2000;Ponte Preta;0;Vitoria;1
-01/02/2000;Sao Paulo;2;Palmeiras;1onal;1
-01/02/2000;Sport;1;Internacional;1
+01/02/2000;Sao Paulo;2;Palmeiras;1
+01/02/2000;Sport;1;Internacional;1ns;1
 09/01/2000;Sao Paulo;1;Vitoria;1
 09/01/2000;Santos;0;Atletico-MG;0
 09/01/2000;Palmeiras;0;Chapecoense;0

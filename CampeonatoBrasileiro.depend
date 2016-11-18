@@ -30,34 +30,40 @@
 	<stdlib.h>
 	"sbb.h"
 
-1479433279 source:c:\lucas\2016\ufmg\tp-02\main.c
-	<stdio.h>
-	<stdlib.h>
-	"sort.h"
-	"team.h"
+1479447738 source:c:\lucas\2016\ufmg\tp-02\main.c
+	"main.h"
+
+1479439718 c:\lucas\2016\ufmg\tp-02\sort.h
+	"main.h"
+
+1479442883 c:\lucas\2016\ufmg\tp-02\team.h
+	"main.h"
+
+1479445558 c:\lucas\2016\ufmg\tp-02\sbb.h
+	"main.h"
+
+1479447733 source:c:\lucas\2016\ufmg\tp-02\sbb.c
 	"sbb.h"
 
-1479230138 c:\lucas\2016\ufmg\tp-02\sort.h
+1479440453 source:c:\lucas\2016\ufmg\tp-02\sort.c
+	"sort.h"
+
+1479442876 source:c:\lucas\2016\ufmg\tp-02\team.c
 	"team.h"
 
-1479424173 c:\lucas\2016\ufmg\tp-02\team.h
+1479447322 source:c:\lucas\2016\ufmg\tp-02\file.c
+	"file.h"
+
+1479439832 c:\lucas\2016\ufmg\tp-02\file.h
+	"main.h"
+
+1479446910 c:\lucas\2016\ufmg\tp-02\main.h
 	<stdio.h>
 	<stdlib.h>
 	<stdbool.h>
 	<string.h>
-
-1479424176 c:\lucas\2016\ufmg\tp-02\sbb.h
+	"sort.h"
 	"team.h"
-
-1479424209 source:c:\lucas\2016\ufmg\tp-02\sbb.c
-	<stdio.h>
-	<stdlib.h>
 	"sbb.h"
-
-1479433187 source:c:\lucas\2016\ufmg\tp-02\sort.c
-	"sort.h"
-
-1479432884 source:c:\lucas\2016\ufmg\tp-02\team.c
-	"team.h"
-	"sort.h"
+	"file.h"
 

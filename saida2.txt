@@ -446,7 +446,7 @@ Cruzeiro 18 4 -7 10
 19/09/2016;Corinthians;2;Santos;5
 19/09/2016;Coritiba;2;Santa Cruz;0
 19/09/2016;Figueirense;1;Palmeiras;2
-19/09/2016;Flamengo;3;Internacional;0pø
+19/09/2016;Flamengo;3;Internacional;0pö
 27/06/2016;Sport;3;Figueirense;2
 27/06/2016;Vitoria;0;Cruzeiro;0
 21/06/2016;Coritiba;0;Botafogo;1

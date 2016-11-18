@@ -1,6 +1,11 @@
 #include "sort.h"
 
-void shellSort(TEAM* array, int elements) {
+/*
+** Ordena o array via shellsort.
+** @param array Array de times
+** @param elements numero de times
+*/
+void shellSort(TEAM *array, int elements) {
    int inner, outer;
    TEAM valueToInsert;
    int interval = 1;
@@ -28,39 +33,61 @@ void shellSort(TEAM* array, int elements) {
    }
 }
 
-void particao (int Esq, int Dir, int *i, int *j, TEAM *A) {
+/*
+** Particiona o Array em sub-arrays.
+** @param esq Index do elemento mais a esquerda.
+** @param dir Index do elemento mais a direita.
+** @param i Index que varre o subarray esquerdo.
+** @param j Index que varre o subarray direito.
+** @param array Array de times
+*/
+void particao (int esq, int dir, int *i, int *j, TEAM *array) {
         TEAM x, w;
-        *i = Esq; *j = Dir;
-        x = A[(*i + *j)/2]; /* obtem o pivo x */
+        *i = esq; *j = dir;
+        x = array[(*i + *j)/2]; /* obtem o pivo x */
     do {
-        while (sort_cmp(&x, &A[*i]) > 0) (*i)++;
-        while (sort_cmp(&x, &A[*j]) < 0) (*j)--;
+        while (sort_cmp(&x, &array[*i]) > 0) (*i)++;
+        while (sort_cmp(&x, &array[*j]) < 0) (*j)--;
         if (*i <= *j ) {
-            w = A[*i];
-            A[*i] = A[*j];
-            A[*j] = w;
+            w = array[*i];
+            array[*i] = array[*j];
+            array[*j] = w;
             (*i)++;
             (*j)--;
         }
     } while (*i <= *j);
 }
 
-void ordena(int Esq, int Dir , TEAM *A)
+/*
+** Ordena o Array usando quicksort.
+** @param esq Index do elemento mais a esquerda.
+** @param dir Index do elemento mais a direita.
+** @param array Array de times
+*/
+void ordena(int esq, int dir , TEAM *array)
 {
     int i, j;
-    particao (Esq, Dir, &i, &j, A);
-    if (Esq < j) ordena(Esq, j, A);
-    if (i < Dir) ordena(i, Dir, A);
+    particao (esq, dir, &i, &j, array);
+    if (esq < j) ordena(esq, j, array);
+    if (i < dir) ordena(i, dir, array);
 }
 
-void quickSort(TEAM teams[], int len, int size) {
+/*
+** Chama a ordenação via quicksort
+** @param teams Array de times
+** @param len Quantidade de times
+*/
+void quickSort(TEAM *teams, int len) {
     ordena(0, len-1, teams);
 }
 
 /*
 ** Comparador dos algorítimos de sorting.
 ** Pontuação, número de vitórias, saldo de gols,
-** gols pró, confronto direto, nome.
+** gols pró, nome.
+** @param a Primeiro time
+** @param b Segundo time
+** @return 1 se a > b, 0 se a = b, -1 se a < b
 */
 int sort_cmp(TEAM *a, TEAM *b) {
     int cmp = calculatePoints(*b) - calculatePoints(*a);
@@ -74,7 +101,6 @@ int sort_cmp(TEAM *a, TEAM *b) {
 
     cmp = b->goals_pro - a->goals_pro;
     if (cmp != 0) { return cmp; }
-
 
     return strcmp(a->name, b->name);
 }

@@ -31,9 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="file.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="main.h" />
 		<Unit filename="sbb.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -45,9 +50,7 @@
 		<Unit filename="team.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="team.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="team.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

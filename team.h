@@ -1,22 +1,20 @@
 #ifndef TEAM_H_INCLUDED
 #define TEAM_H_INCLUDED
-#define __USE_C99_MATH
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
+#include "main.h"
 
-#define WIN_POINTS 3
-
-
-enum game { DATE, TEAM1, GOAL1, TEAM2, GOAL2 };
-
-typedef struct TEAM TEAM;
 typedef struct TOURNAMENT TOURNAMENT;
+typedef struct TEAM TEAM;
 
+/*
+** Struct do tipo TEAM: representa um time do campeonato.
+** name = nome do time
+** wins = número de vitórias
+** draws = número de empates
+** goals_pro = gols feitos
+** goals_con = gols sofridos
+*/
 struct TEAM {
-    int id;
     char name[25];
     int wins;
     int draws;
@@ -24,6 +22,15 @@ struct TEAM {
     int goals_con;
 };
 
+/*
+** Struct do tipo TOURNAMENT: representa o torneio
+** hashSize = tamanho da hash table
+** choosedSort = algorítmo de ordenação escolhido
+** teamsNum = número de times
+** roundsNum = número de rodadas
+** gamesPerRound = número de jogos por rodada
+** teams = times do campeonato
+*/
 struct TOURNAMENT {
     int hashSize;
     int choosedSort;
@@ -33,22 +40,18 @@ struct TOURNAMENT {
     TEAM* teams;
 };
 
-TEAM initializeTeam(char* name, int id, int teamsNum);
+TEAM initializeTeam(char *name);
 
-TEAM* getTeamByName(char* name, TEAM* teams, int num);
+TEAM* getTeamByName(char *name, TEAM *teams, int num);
 
 void updateMatchData();
 
-void printRound(FILE* f, int round, TOURNAMENT t);
+void printRound(FILE *f, int round, TOURNAMENT t);
 
 int calculatePoints (TEAM team);
 
 int calculateGoals (TEAM team);
 
-void copyTeam (TEAM* a, TEAM* b);
-
-void printTeam(FILE* f, TEAM team);
-
-int dateToKey (char* date);
+void printTeam(FILE *f, TEAM team);
 
 #endif // TEAM_H_INCLUDED
